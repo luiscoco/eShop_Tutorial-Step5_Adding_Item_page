@@ -207,6 +207,9 @@ Parts of the functionality, such as **updating the cart** quantity or **adding i
 
 ## 2. A deeper explanation about the Catalogue main web page
 
+The Catalogue web page is implemented in the **Catalog.razor** componente
+
+![image](https://github.com/user-attachments/assets/59725461-d58f-4f68-aa30-7e43a05b4d46)
 
 
 ## 3. A deeper explanation about how to navigate from Catalogue web page to the Item Page
