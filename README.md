@@ -207,10 +207,153 @@ Parts of the functionality, such as **updating the cart** quantity or **adding i
 
 ## 2. A deeper explanation about the Catalogue main web page
 
-The Catalogue web page is implemented in the **Catalog.razor** componente
+The Catalogue web page is implemented in the **Catalog.razor** component
 
 ![image](https://github.com/user-attachments/assets/59725461-d58f-4f68-aa30-7e43a05b4d46)
 
+Let's review the **Catalog.razor** component code:
+
+```razor
+@using Microsoft.AspNetCore.Components.Sections
+@using WebAppComponents.Catalog
+@page "/"
+
+@inject NavigationManager Nav
+@inject CatalogService CatalogService
+@attribute [StreamRendering]
+
+<PageTitle>AdventureWorks</PageTitle>
+<SectionContent SectionName="page-header-title">Ready for a new adventure?</SectionContent>
+<SectionContent SectionName="page-header-subtitle">Start the season with the latest in clothing and equipment.</SectionContent>
+
+<div class="catalog">
+    <CatalogSearch BrandId="@BrandId" ItemTypeId="@ItemTypeId" />
+
+    @if (catalogResult is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div>
+            <div class="catalog-items">
+                @foreach (var item in catalogResult.Data)
+                {
+                    <CatalogListItem Item="@item" />
+                }
+            </div>
+
+            <div class="page-links">
+                @foreach (var pageIndex in GetVisiblePageIndexes(catalogResult))
+                {
+                    <NavLink ActiveClass="active-page" Match="@NavLinkMatch.All" href="@Nav.GetUriWithQueryParameter("page", pageIndex == 1 ? null : pageIndex)">@pageIndex</NavLink>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    const int PageSize = 9;
+
+    [SupplyParameterFromQuery]
+    public int? Page { get; set; }
+
+    [SupplyParameterFromQuery(Name = "brand")]
+    public int? BrandId { get; set; }
+
+    [SupplyParameterFromQuery(Name = "type")]
+    public int? ItemTypeId { get; set; }
+
+    CatalogResult? catalogResult;
+
+    static IEnumerable<int> GetVisiblePageIndexes(CatalogResult result)
+        => Enumerable.Range(1, (int)Math.Ceiling(1.0 * result.Count / PageSize));
+
+    protected override async Task OnInitializedAsync()
+    {
+        catalogResult = await CatalogService.GetCatalogItems(
+            Page.GetValueOrDefault(1) - 1,
+            PageSize,
+            BrandId,
+            ItemTypeId);
+    }
+}
+```
+
+This code defines a Blazor component that represents a **product catalog page** for a web application
+
+This component leverages Blazor's ability to build interactive web UIs with rich data-binding and state management
+
+It focuses on modularity and reusability, seen in the use of components like **CatalogSearch** and **CatalogListItem**
+
+**Key Functionalities**
+
+Displays a searchable, paginated product catalog
+
+Dynamically updates based on URL query parameters (e.g., ?page=2&brand=1)
+
+Efficiently fetches data using the CatalogService and renders it
+
+Here's a brief explanation of its structure and functionality:
+
+**Imports and Dependencies**
+
+@using directives: Includes namespaces for additional functionality
+
+Microsoft.AspNetCore.Components.Sections: Manages page sections
+
+WebAppComponents.Catalog: Likely contains catalog-related components and services
+
+@page directive: Declares the page's route as /
+
+@inject directives: Injects dependencies for: NavigationManager (Nav), helps navigate programmatically and manipulate URLs and CatalogService (CatalogService), provides catalog data
+
+**Attributes**
+
+[StreamRendering]: Optimizes rendering for performance (used for streaming updates)
+
+**Page Header Content**
+
+<PageTitle>: Sets the browser tab title
+
+<SectionContent>: Defines header sections (Title: "Ready for a new adventure?" and Subtitle: "Start the season with the latest in clothing and equipment.")
+
+**Catalog Layout**
+
+**Search Bar**:
+
+<CatalogSearch>: Displays a search component for filtering by brand or item type.
+
+**Catalog Loading and Display**: If catalogResult is null, a "Loading..." message is displayed
+
+Otherwise:
+
+Items Display: A grid or list of items rendered using <CatalogListItem> for each item in catalogResult.Data
+
+Pagination: Links for pagination, allowing navigation between pages. The current page is highlighted using the ActiveClass="active-page" attribute.
+
+**Code Section (@code)**
+
+**Constants and Parameters**:
+
+PageSize: Sets the number of items displayed per page (9)
+
+Query parameters ([SupplyParameterFromQuery]): Maps query strings from the URL to Blazor component properties:
+
+Page: Current page index
+
+BrandId and ItemTypeId: Filter values
+
+**Data Model**:
+
+catalogResult: Holds the catalog data retrieved from the service
+
+GetVisiblePageIndexes: Calculates the visible page numbers based on total items and PageSize
+
+**Lifecycle Method**:
+
+OnInitializedAsync: Fetches catalog data from the CatalogService asynchronously when the component initializes, based on the current page and filters
 
 ## 3. A deeper explanation about how to navigate from Catalogue web page to the Item Page
 
