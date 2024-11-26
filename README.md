@@ -555,10 +555,184 @@ public static class ItemHelper
 }
 ```
 
+## 6. We explain the CatalogSearch razor component
 
+The  **CatalogListItem.razor** contains a product images list 
 
+We verify the  **CatalogListItem.razor** location inside the **WebAppComponents** project
 
-## 6. We ezplain the CatalogSearch razor component
+![image](https://github.com/user-attachments/assets/0faec899-ba64-428a-8472-66aa5cf7343e)
 
+The following code is designed to be responsive to user input and dynamically update the UI and navigation based on the **selected filters**
 
+It is a good example of combining Blazor's data binding, dependency injection, and navigation capabilities
 
+**How It Works**
+
+The component **initializes** by fetching available brands and types from the **CatalogService**
+
+Once the data is fetched, it **renders a filtering UI** with dynamic links for filtering items by brand or type
+
+Clicking on a filter link **navigates** to a new URL with updated query parameters using the NavigationManager, allowing the application to apply the selected filter
+
+We can review the source code:
+
+```razor
+@inject CatalogService CatalogService
+@inject NavigationManager Nav
+
+@if (catalogBrands is not null && catalogItemTypes is not null)
+{
+    <div class="catalog-search">
+        <div class="catalog-search-header">
+            <img role="presentation" src="icons/filters.svg" />
+            Filters
+        </div>
+        <div class="catalog-search-types">
+            <div class="catalog-search-group">
+                <h3>Brand</h3>
+                <div class="catalog-search-group-tags">
+                    <a href="@BrandUri(null)"
+                    class="catalog-search-tag @(BrandId == null ? "active " : "")">
+                        All
+                    </a>
+                    @foreach (var brand in catalogBrands)
+                    {
+                        <a href="@BrandUri(brand.Id)"
+                        class="catalog-search-tag @(BrandId == brand.Id ? "active " : "")">
+                            @brand.Brand
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="catalog-search-group">
+                <h3>Type</h3>
+
+                <div class="catalog-search-group-tags">
+                    <a href="@TypeUri(null)"
+                    class="catalog-search-tag @(ItemTypeId == null ? "active " : "")">
+                    All
+                    </a>
+                    @foreach (var itemType in catalogItemTypes)
+                    {
+                        <a href="@TypeUri(itemType.Id)"
+                        class="catalog-search-tag @(ItemTypeId == itemType.Id ? "active " : "")">
+                            @itemType.Type
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    IEnumerable<CatalogBrand>? catalogBrands;
+    IEnumerable<CatalogItemType>? catalogItemTypes;
+    [Parameter] public int? BrandId { get; set; }
+    [Parameter] public int? ItemTypeId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var brandsTask = CatalogService.GetBrands();
+        var itemTypesTask = CatalogService.GetTypes();
+        await Task.WhenAll(brandsTask, itemTypesTask);
+        catalogBrands = brandsTask.Result;
+        catalogItemTypes = itemTypesTask.Result;
+    }
+
+    private string BrandUri(int? brandId) => Nav.GetUriWithQueryParameters(new Dictionary<string, object?>()
+    {
+        { "page", null },
+        { "brand", brandId },
+    });
+
+    private string TypeUri(int? typeId) => Nav.GetUriWithQueryParameters(new Dictionary<string, object?>()
+    {
+        { "page", null },
+        { "type", typeId },
+    });
+}
+```
+
+This code is a Razor component in a Blazor application. It creates a search filter interface for catalog items based on "Brand" and "Type." Here's a breakdown of the functionality:
+
+**Dependency Injection**
+
+@inject CatalogService CatalogService: Injects a CatalogService dependency, which is presumably used to fetch catalog data like brands and item types
+
+@inject NavigationManager Nav: Injects the NavigationManager, which is used to construct navigation URIs
+
+**UI Rendering Logic**
+
+Condition for Rendering:
+
+```csharp
+@if (catalogBrands is not null && catalogItemTypes is not null)
+```
+
+The component only renders the filter UI when both catalogBrands and catalogItemTypes have been loaded (i.e., are not null)
+
+Filters Layout:
+
+A header with a filter icon:
+
+```html
+<div class="catalog-search-header">
+    <img role="presentation" src="icons/filters.svg" />
+    Filters
+</div>
+```
+
+Two filter groups: "Brand" and "Type." Each group contains:
+
+An "All" option that removes the filter (sets the respective ID to null)
+
+A list of clickable options for brands or types fetched from the service, dynamically generated with a foreach loop
+
+Dynamic Class for Active Selection:
+
+Highlights the active filter (current selection) with the active class:
+
+```html
+class="catalog-search-tag @(BrandId == brand.Id ? "active " : "")"
+```
+
+Dynamic Links:
+
+Uses BrandUri and TypeUri methods to construct navigation URLs dynamically, updating the query parameters for brand or type:
+
+```csharp
+private string BrandUri(int? brandId) => Nav.GetUriWithQueryParameters(new Dictionary<string, object?>()
+{
+    { "page", null },
+    { "brand", brandId },
+});
+```
+
+**Component State and Parameters**
+
+State Variables: catalogBrands and catalogItemTypes, hold the list of brands and item types fetched from the CatalogService. BrandId and ItemTypeId: Represent the currently selected brand and item type IDs
+
+Parameters:
+
+```csharp
+[Parameter] public int? BrandId { get; set; }
+[Parameter] public int? ItemTypeId { get; set; } These are input parameters for the component, possibly passed from a parent component or set via route parameters.
+```
+
+**Data Initialization**
+
+OnInitializedAsync Method: Fetches the data for brands and item types asynchronously from the CatalogService:
+
+```csharp
+var brandsTask = CatalogService.GetBrands();
+var itemTypesTask = CatalogService.GetTypes();
+await Task.WhenAll(brandsTask, itemTypesTask);
+catalogBrands = brandsTask.Result;
+catalogItemTypes = itemTypesTask.Result;
+```
+
+**Helper Methods for Navigation**
+
+BrandUri and TypeUri: Construct URLs with updated query parameters, resetting the "page" parameter and setting the appropriate brand or type parameter
