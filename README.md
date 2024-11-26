@@ -204,8 +204,37 @@ Integration with Services: Uses CatalogService to fetch product details and a (c
 
 Parts of the functionality, such as **updating the cart** quantity or **adding items to the cart**, are commented out, indicating they might be a work in progress or require additional implementation
 
+## 2. We run the application and verify the results
 
-## 2. A deeper explanation about the Catalogue main web page
+When we run the application it first appears the Aspire Dashboard
+
+![image](https://github.com/user-attachments/assets/212a50c2-3855-4016-ad4c-ec748d898618)
+
+We navigate to the **WebApp** (https://localhost:7112/) and click on one item picture, we will be redirect to the **Item Page**
+
+![image](https://github.com/user-attachments/assets/a11742fa-87ad-4b23-a8a2-aa3159e037e2)
+
+Now we can visualize the **Item Page**
+
+![image](https://github.com/user-attachments/assets/84e66bba-76f1-48dd-9cd6-6f58484975b5)
+
+If we previously did **Not Logged** in the application we cannot see the **Add to Cart** button
+
+Then we can go back to the **main Catalogue** web page and **Login** 
+
+![image](https://github.com/user-attachments/assets/81c154e1-d866-4b6e-9f82-d50d3750b8a4)
+
+After pressing on the **Login button** we are redirect to the **Login** web page
+
+We enter the **Username** and **Password** and then press the **Login button**
+
+![image](https://github.com/user-attachments/assets/da740d9b-a8fa-4f8b-888c-f116c8d9423e)
+
+Now we are redirect to the **Catalogue** main web page and here we can press again in the bag picture to navigate to the **Item Page**
+
+![image](https://github.com/user-attachments/assets/2bf99784-2db0-4203-8d96-d15026d54956)
+
+## 3. A deeper explanation about the Catalogue main web page
 
 The Catalogue web page is implemented in the **Catalog.razor** component
 
@@ -355,40 +384,9 @@ GetVisiblePageIndexes: Calculates the visible page numbers based on total items 
 
 OnInitializedAsync: Fetches catalog data from the CatalogService asynchronously when the component initializes, based on the current page and filters
 
-## 3. A deeper explanation about how to navigate from Catalogue web page to the Item Page
+## 4. A deeper explanation about how to navigate from Catalogue web page to the Item Page
 
 
-
-
-## 4. We run the application and verify the results
-
-When we run the application it first appears the Aspire Dashboard
-
-![image](https://github.com/user-attachments/assets/212a50c2-3855-4016-ad4c-ec748d898618)
-
-We navigate to the **WebApp** (https://localhost:7112/) and click on one item picture, we will be redirect to the **Item Page**
-
-![image](https://github.com/user-attachments/assets/a11742fa-87ad-4b23-a8a2-aa3159e037e2)
-
-Now we can visualize the **Item Page**
-
-![image](https://github.com/user-attachments/assets/84e66bba-76f1-48dd-9cd6-6f58484975b5)
-
-If we previously did **Not Logged** in the application we cannot see the **Add to Cart** button
-
-Then we can go back to the **main Catalogue** web page and **Login** 
-
-![image](https://github.com/user-attachments/assets/81c154e1-d866-4b6e-9f82-d50d3750b8a4)
-
-After pressing on the **Login button** we are redirect to the **Login** web page
-
-We enter the **Username** and **Password** and then press the **Login button**
-
-![image](https://github.com/user-attachments/assets/da740d9b-a8fa-4f8b-888c-f116c8d9423e)
-
-Now we are redirect to the **Catalogue** main web page and here we can press again in the bag picture to navigate to the **Item Page**
-
-![image](https://github.com/user-attachments/assets/2bf99784-2db0-4203-8d96-d15026d54956)
 
 
 
