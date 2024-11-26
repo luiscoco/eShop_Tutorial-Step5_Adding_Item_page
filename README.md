@@ -234,7 +234,101 @@ Now we are redirect to the **Catalogue** main web page and here we can press aga
 
 ![image](https://github.com/user-attachments/assets/2bf99784-2db0-4203-8d96-d15026d54956)
 
-## 3. A deeper explanation about the Catalogue main web page
+## 3. An explanation about the MainLayot razor component
+
+We are going to explain how **Catalogue Web Page** is implemented
+
+
+
+The **Catalogue Web Page** main frame is the **MainLayout.razor** component
+
+![image](https://github.com/user-attachments/assets/c655bf26-3806-45fa-bcfa-cdcaa8fe6cf6)
+
+This is the source code 
+
+**MainLayout.razor**
+
+```razor
+@* @using eShop.WebApp.Components.Chatbot *@
+@inherits LayoutComponentBase
+
+<HeaderBar />
+@Body
+@* <ShowChatbotButton /> *@
+<FooterBar />
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+```
+
+The **MainLayout.razor** component contains three razor components: **HeaderBar**, **FooterBar** and **ShowChatbotButton**
+
+First we review see the **HeaderBar**
+
+![image](https://github.com/user-attachments/assets/965b1340-8a3c-484d-a744-f0fe1a5b34e5)
+
+This is the **HeaderBar.razor** source code:
+
+```razor
+@using Microsoft.AspNetCore.Components.Endpoints
+@using Microsoft.AspNetCore.Components.Sections;
+
+<div class="eshop-header @(IsCatalog? "home" : "")">
+    <div class="eshop-header-hero">
+        @{
+            var headerImage = IsCatalog ? "images/header-home.webp" : "images/header.webp";
+        }
+        <img role="presentation" src="@headerImage" />
+    </div>
+    <div class="eshop-header-container">
+        <nav class="eshop-header-navbar">
+            <a class="logo logo-header" href="">
+                <img alt="AdventureWorks" src="images/logo-header.svg" class="logo logo-header" />
+            </a>
+            
+            <UserMenu />
+         @*    <CartMenu /> *@
+        </nav>
+        <div class="eshop-header-intro">
+            <h1><SectionOutlet SectionName="page-header-title" /></h1>
+            <p><SectionOutlet SectionName="page-header-subtitle" /></p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+
+    // We can use Endpoint Metadata to determine the page currently being visited
+    private Type? PageComponentType => HttpContext?.GetEndpoint()?.Metadata.OfType<ComponentTypeMetadata>().FirstOrDefault()?.Type;
+    private bool IsCatalog => PageComponentType == typeof(Pages.Catalog.Catalog);
+}
+```
+
+We can also review the  **FooterBar.razor** 
+
+![image](https://github.com/user-attachments/assets/e5f8c549-4bab-4838-8e1e-da9830599737)
+
+This is the **FooterBar.razor** source code:
+
+```razor
+<footer class='eshop-footer'>
+  <div class='eshop-footer-content'>
+    <div class='eshop-footer-row'>
+      <img role="presentation" src='images/logo-footer.svg' class='logo logo-footer' />
+      <p>© AdventureWorks</p>
+    </div>
+  </div>
+</footer>
+```
+
+
+
+## 4. Am explanation about the Catalogue razor component
 
 The Catalogue web page is implemented in the **Catalog.razor** component
 
