@@ -334,6 +334,12 @@ This is the **FooterBar.razor** source code:
 
 The Catalogue web page is implemented in the **Catalog.razor** component
 
+It contains other two razor components: **CatalogSearch.razor** and **CatalogListItem.razor**
+
+![image](https://github.com/user-attachments/assets/11aa2886-0bbf-4fd4-bb71-6f70143a018a)
+
+We verify the **Catalog.razor** component location in the project folders and files structure
+
 ![image](https://github.com/user-attachments/assets/59725461-d58f-4f68-aa30-7e43a05b4d46)
 
 Let's review the **Catalog.razor** component code:
