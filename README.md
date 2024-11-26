@@ -204,7 +204,17 @@ Integration with Services: Uses CatalogService to fetch product details and a (c
 
 Parts of the functionality, such as **updating the cart** quantity or **adding items to the cart**, are commented out, indicating they might be a work in progress or require additional implementation
 
-## 2. We run the application and verify the results
+
+## 2. A deeper explanation about the Catalogue main web page
+
+
+
+## 3. A deeper explanation about how to navigate from Catalogue web page to the Item Page
+
+
+
+
+## 4. We run the application and verify the results
 
 When we run the application it first appears the Aspire Dashboard
 
@@ -233,6 +243,7 @@ We enter the **Username** and **Password** and then press the **Login button**
 Now we are redirect to the **Catalogue** main web page and here we can press again in the bag picture to navigate to the **Item Page**
 
 ![image](https://github.com/user-attachments/assets/2bf99784-2db0-4203-8d96-d15026d54956)
+
 
 
 
