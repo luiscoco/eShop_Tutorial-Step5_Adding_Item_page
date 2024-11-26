@@ -242,7 +242,7 @@ We are going to explain how **Catalogue Web Page** is implemented
 
 ![image](https://github.com/user-attachments/assets/11aa2886-0bbf-4fd4-bb71-6f70143a018a)
 
-
+![image](https://github.com/user-attachments/assets/c4590df3-119b-4f50-8239-66efa185bbbf)
 
 The **Catalogue Web Page** main frame is the **MainLayout.razor** component
 
