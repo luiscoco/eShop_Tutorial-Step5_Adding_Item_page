@@ -486,10 +486,79 @@ GetVisiblePageIndexes: Calculates the visible page numbers based on total items 
 
 OnInitializedAsync: Fetches catalog data from the CatalogService asynchronously when the component initializes, based on the current page and filters
 
-## 5. We explain how to navigate from Catalogue web page to the Item Page
+## 5. We ezplain the CatalogListItem razor component
+
+As we explain in section 4 the **Catalogue** web page is implemented in the **Catalog.razor** component, and it contains other two razor components: **CatalogSearch.razor** and **CatalogListItem.razor**
+
+![image](https://github.com/user-attachments/assets/11aa2886-0bbf-4fd4-bb71-6f70143a018a)
+
+The  **CatalogListItem.razor** contains a product images list 
+
+We verify the  **CatalogListItem.razor** location inside the **WebAppComponents** project
+
+![image](https://github.com/user-attachments/assets/0faec899-ba64-428a-8472-66aa5cf7343e)
+
+We can review the  **CatalogListItem.razor** source code
+
+```razor
+@using eShop.WebAppComponents.Item
+@inject IProductImageUrlProvider ProductImages
+
+<div class="catalog-item">
+    <a class="catalog-product" href="@ItemHelper.Url(Item)" data-enhance-nav="false">
+        <span class='catalog-product-image'>
+            <img alt="@Item.Name" src='@ProductImages.GetProductImageUrl(Item)' />
+        </span>
+        <span class='catalog-product-content'>
+            <span class='name'>@Item.Name</span>
+            <span class='price'>$@Item.Price.ToString("0.00")</span>
+        </span>
+    </a>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public required CatalogItem Item { get; set; }
+
+    [Parameter]
+    public bool IsLoggedIn { get; set; }
+}
+```
+
+When we press in one of the **Product Image** we are redirected to the corresponding **Item Page**. We focus on the following code included in the **CatalogListItem.razor**
+
+```razor
+<a class="catalog-product" href="@ItemHelper.Url(Item)" data-enhance-nav="false">
+    <span class='catalog-product-image'>
+        <img alt="@Item.Name" src='@ProductImages.GetProductImageUrl(Item)' />
+    </span>
+    <span class='catalog-product-content'>
+        <span class='name'>@Item.Name</span>
+        <span class='price'>$@Item.Price.ToString("0.00")</span>
+    </span>
+</a>
+```
+
+The ```@ItemHelper.Url(Item)``` code redirect us to the **Item Page**
+
+**ItemHelper.cs**
+
+```csharp
+using eShop.WebAppComponents.Catalog;
+
+namespace eShop.WebAppComponents.Item;
+
+public static class ItemHelper
+{
+    public static string Url(CatalogItem item)
+        => $"item/{item.Id}";
+}
+```
 
 
 
+
+## 6. We ezplain the CatalogSearch razor component
 
 
 
