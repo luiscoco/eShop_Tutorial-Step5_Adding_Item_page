@@ -204,3 +204,18 @@ Integration with Services: Uses CatalogService to fetch product details and a (c
 
 Parts of the functionality, such as **updating the cart** quantity or **adding items to the cart**, are commented out, indicating they might be a work in progress or require additional implementation
 
+## 2. We run the application and verify the results
+
+When we run the application it first appears the Aspire Dashboard
+
+![image](https://github.com/user-attachments/assets/212a50c2-3855-4016-ad4c-ec748d898618)
+
+We navigate to the **WebApp** (https://localhost:7112/) and click on one item picture, we will be redirect to the **Item Page**
+
+![image](https://github.com/user-attachments/assets/a11742fa-87ad-4b23-a8a2-aa3159e037e2)
+
+Now we can visualize the **Item Page**
+
+![image](https://github.com/user-attachments/assets/84e66bba-76f1-48dd-9cd6-6f58484975b5)
+
+
