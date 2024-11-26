@@ -222,3 +222,17 @@ If we previously did **Not Logged** in the application we cannot see the **Add t
 
 Then we can go back to the **main Catalogue** web page and **Login** 
 
+![image](https://github.com/user-attachments/assets/81c154e1-d866-4b6e-9f82-d50d3750b8a4)
+
+After pressing on the **Login button** we are redirect to the **Login** web page
+
+We enter the **Username** and **Password** and then press the **Login button**
+
+![image](https://github.com/user-attachments/assets/da740d9b-a8fa-4f8b-888c-f116c8d9423e)
+
+Now we are redirect to the **Catalogue** main web page and here we can press again in the bag picture to navigate to the **Item Page**
+
+![image](https://github.com/user-attachments/assets/2bf99784-2db0-4203-8d96-d15026d54956)
+
+
+
