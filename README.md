@@ -234,7 +234,7 @@ Now we are redirect to the **Catalogue** main web page and here we can press aga
 
 ![image](https://github.com/user-attachments/assets/2bf99784-2db0-4203-8d96-d15026d54956)
 
-## 3. An explanation about the MainLayot razor component
+## 3. We explain the MainLayot razor component
 
 We are going to explain how **Catalogue Web Page** is implemented
 
@@ -330,9 +330,7 @@ This is the **FooterBar.razor** source code:
 </footer>
 ```
 
-
-
-## 4. Am explanation about the Catalogue razor component
+## 4.We explain the Catalogue razor component
 
 The Catalogue web page is implemented in the **Catalog.razor** component
 
@@ -482,7 +480,7 @@ GetVisiblePageIndexes: Calculates the visible page numbers based on total items 
 
 OnInitializedAsync: Fetches catalog data from the CatalogService asynchronously when the component initializes, based on the current page and filters
 
-## 4. A deeper explanation about how to navigate from Catalogue web page to the Item Page
+## 5. We explain how to navigate from Catalogue web page to the Item Page
 
 
 
