@@ -218,4 +218,7 @@ Now we can visualize the **Item Page**
 
 ![image](https://github.com/user-attachments/assets/84e66bba-76f1-48dd-9cd6-6f58484975b5)
 
+If we previously did **Not Logged** in the application we cannot see the **Add to Cart** button
+
+Then we can go back to the **main Catalogue** web page and **Login** 
 
