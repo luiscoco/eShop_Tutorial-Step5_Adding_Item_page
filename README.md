@@ -17,7 +17,7 @@ We navigate to the WebApp project and we add a new folder **Item**, see this pic
 
 Inside the **Item** folder we create a new razor component called **ItemPage.razor**. This is the new componente source code:
 
-```csharp
+```razor
 @page "/item/{itemId:int}"
 @using System.Net
 @inject CatalogService CatalogService
