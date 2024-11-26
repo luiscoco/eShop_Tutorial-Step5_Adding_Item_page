@@ -238,6 +238,10 @@ Now we are redirect to the **Catalogue** main web page and here we can press aga
 
 We are going to explain how **Catalogue Web Page** is implemented
 
+![image](https://github.com/user-attachments/assets/a5ecc2af-8f5c-4c73-ac50-e05516ab80ac)
+
+![image](https://github.com/user-attachments/assets/11aa2886-0bbf-4fd4-bb71-6f70143a018a)
+
 
 
 The **Catalogue Web Page** main frame is the **MainLayout.razor** component
