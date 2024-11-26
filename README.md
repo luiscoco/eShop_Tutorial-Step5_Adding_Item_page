@@ -1,15 +1,10 @@
 # Building 'eShop' from Zero to Hero: We add Item Page
 
-For start working with this sample we have to download open in Visual Studio 2022 the solution in this github repo: 
-
-
-
-
 ## 1. We add the ItemPage razor component
 
 We run Visual Studio 2022 and we open the solution downloaded in this github repo:
 
-
+https://github.com/luiscoco/eShop_Aspire-Tutorial-Step4__IdentityServer4
 
 We navigate to the WebApp project and we add a new folder **Item**, see this picture
 
